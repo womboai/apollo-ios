@@ -19,6 +19,8 @@ enum SQLiteSerialization {
       return [serializedReferenceKey: reference.key]
     case let array as [Record.Value]:
       return try array.map { try serialize(fieldValue: $0) }
+    case let value as JSONEncodable:
+        return value._jsonValue
     default:
       return fieldValue
     }

@@ -1,3 +1,4 @@
+import Foundation
 #if !COCOAPODS
 import ApolloAPI
 #endif
@@ -29,7 +30,7 @@ final class GraphQLSelectionSetMapper<SelectionSet: AnySelectionSet>: GraphQLRes
   }
 
   func accept(fieldEntry: JSONValue?, info: FieldExecutionInfo) -> (key: String, value: JSONValue)? {
-    guard let fieldEntry = fieldEntry else { return nil }
+    guard let fieldEntry = fieldEntry else { return (info.responseKeyForField, NSNull()) }
     return (info.responseKeyForField, fieldEntry)
   }
 
